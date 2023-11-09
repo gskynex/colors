@@ -1,0 +1,60 @@
+{
+  "name": "@njs-lib/colors",
+  "version": "1.0.2",
+  "author": "njs-lib",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "homepage": "https://github.com/njs-lib/colors#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/njs-lib/colors.git"
+  },
+  "bugs": {
+    "url": "https://github.com/njs-lib/colors/issues"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "keywords": [
+    "color",
+    "colors",
+    "colors-builder"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "rimraf dist && tsup",
+    "lint": "eslint src --ext .js,.ts",
+    "test": "jest --config jest.config.js"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.8",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
+    "eslint": "^8.53.0",
+    "eslint-plugin-jest": "^27.6.0",
+    "jest": "^29.7.0",
+    "rimraf": "^5.0.5",
+    "ts-jest": "^29.1.1",
+    "ts-node": "^10.9.1",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2"
+  },
+  "engines": {
+    "node": ">=16.16.0"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  }
+}
