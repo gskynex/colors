@@ -1,16 +1,17 @@
-# @njs-lib/colors
+## @njs-lib/colors
 
-## Purpose
+### Overview
 
-The purpose of the library is to simplify and standardize working with colors in web development. It is designed to provide a convenient and structured tool for creating, organizing, and managing colors in projects.
+The library aims to simplify and standardize color management in web development. It provides a convenient and structured tool for creating, organizing, and managing colors in projects.
 
-## Features
+**Features**
+
  - Create Color Objects: Create color objects with red (r), green (g), and blue (b) components and assign unique tokens to them.
  - Convert to Different Formats: Easily convert colors to different formats such as RGB and hexadecimal.
  - Colors creating: Use the ColorsBuilder class to create your colors collection.
  - Get Color Information: Access color properties and methods for comprehensive color information.
 
-## Installation
+### Installation
 
 You can install the library using npm.
 
@@ -20,13 +21,13 @@ Using npm:
 npm install @njs-lib/colors --save
 ```
 
-## Color Class
+### Color Class
 
-The **Color** class represents a color object with red (r), green (g), and blue (b) components.
+The Color class represents a color object with red (r), green (g), and blue (b) components.
 
-### Constructor
+#### Constructor
 
-#### `new Color(r: number, g: number, b: number, token: string)`
+##### `new Color(r: number, g: number, b: number, token: string)`
 
 Creates a new `Color` instance.
 
@@ -35,43 +36,47 @@ Creates a new `Color` instance.
 - `b`: The blue component (0-255).
 - `token`: A unique token for the color.
 
-### Getters
+#### Getters
 
-#### `r: number`
+##### `r: number`
 
 Gets the red component of the color (0-255).
 
-#### `g: number`
+##### `g: number`
 
 Gets the green component of the color (0-255).
 
-#### `b: number`
+##### `b: number`
 
 Gets the blue component of the color (0-255).
 
-#### `token: string`
+##### `token: string`
 
 Gets the token associated with the color.
 
-### Methods
+#### Methods
 
-#### `toRgb(): string`
+##### `toRgb(): string`
 
 Converts the color to an RGB string representation (e.g., 'rgb(255, 0, 0)').
 
-#### `toRgba(alpha: number): string`
+##### `toRgba(alpha: number): string`
 
 Converts the color to an RGBA string representation (e.g., 'rgba(255, 0, 0, 0.5)').
 
-#### `toHex(): string`
+##### `toHex(): string`
 
 Converts the color to a hexadecimal string representation (e.g., '#FF0000').
 
-#### `toArray(): number[]`
+##### `toHsl(): string`
+
+Converts the color to a Human-Readable HSL string representation (e.g., 'hsl(0deg, 100%, 50%)').
+
+##### `toArray(): number[]`
 
 Converts the color to an array of red, green, and blue components.
 
-### Example
+#### Example
 
 ```javascript
 import { Color } from '@njs-lib/colors';
@@ -81,22 +86,23 @@ const red = new Color(255, 0, 0, 'red');
 red.toHex();      // Output: #FF0000
 red.toRgb();      // Output: rgb(255, 0, 0)
 red.toRgba(0.2);  // Output: rgba(255, 0, 0, 0.2)
+red.toHsl();      // Output: hsl(0deg, 100%, 50%)
 red.toArray();    // Output: [255, 0, 0]
 ```
 
-## ColorsBuilder Class
+### ColorsBuilder Class
 
 A builder class for creating colors. This class provides a fluent interface for adding colors, enabling exception skipping, creating colors based on added color definitions and destroying the instance.
 
-### Constructor
+#### Constructor
 
-#### `new ColorBuilder()`
+##### `new ColorBuilder()`
 
 Creates a new `ColorBuilder` instance.
 
-### Methods
+#### Methods
 
-#### `addColor(r, g, b, token)`
+##### `addColor(r, g, b, token)`
 
 Adds a color with the specified RGB values and token.
 
@@ -105,19 +111,19 @@ Adds a color with the specified RGB values and token.
 - `b` (number): The blue component (0-255).
 - `token` (string): A unique token for the color.
 
-#### `addSkipException()`
+##### `addSkipException()`
 
 Enables skipping exceptions when creating colors.
 
-#### `create()`
+##### `create()`
 
 Creates colors based on added color definitions.
 
-#### `destroy()`
+##### `destroy()`
 
 Destroys the `ColorsBuilder` instance and clears all data.
 
-### Example
+#### Example
 
 ```javascript
 import { ColorsBuilder } from '@njs-lib/colors';
@@ -131,39 +137,46 @@ const colorsBuilder = new ColorsBuilder()
 colorsBuilder.destroy();
 ```
 
-## Colors Class
+### Colors Class
 
 Manages and interacts with color data.
 
-### Methods
+#### Methods
 
-#### `static getTotal()`
+##### `static getTotal()`
 
 Get the total number of colors.
 
-#### `static getTokens()`
+##### `static getTokens()`
 
 Get a list of color tokens.
 
-#### `static getValues(type)`
+##### `static getTypes()`
 
-Get color values in the specified format (e.g., 'toHex' or 'toRgb').
+Get a list of color types.
 
-#### `static getColor(token)`
+##### `static getValues(type)`
+
+Get color values in the specified format (e.g., 'toHex' or 'toRgb' or 'toHsl').
+
+##### `static getColor(token)`
 
 Get a color by its token (e.g., 'white' or 'black').
 
-### Example
+#### Example
 
 ```javascript
 import { Colors } from '@njs-lib/colors';
 
 Colors.getTotal();                       // 2
 Colors.getTokens();                      // ["black", "white"]
+Colors.getTypes();                       // ["toHex", "toRgb", "toHsl"]
 Colors.getColor('black');                // Color
 Colors.getColor('black').toHex();        // #000000
 Colors.getColor('black').toRgb();        // rgb(0, 0, 0)
 Colors.getColor('black').toRgba(0.4);    // rgba(0, 0, 0, 0.4)
+Colors.getColor('black').toHsl();        // hsl(0deg, 0%, 0%)
 Colors.getValues('toHex');               // ["#000000", "#ffffff"]
 Colors.getValues('toRgb');               // ["rgb(0, 0, 0)", "rgb(255, 255, 255)"]
+Colors.getValues('toHsl');               // ["hsl(0deg, 0%, 0%)", "hsl(0deg, 0%, 100%)"]
 ```

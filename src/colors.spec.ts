@@ -9,6 +9,10 @@ describe('Colors', () => {
     expect(Colors.getTokens()).toEqual([]);
   });
 
+  test('should return the list of color types', () => {
+    expect(Colors.getTypes()).toEqual(['toHex', 'toRgb', 'toHsl']);
+  });
+
   test('should return color values in RGB format', () => {
     expect(Colors.getValues('toRgb')).toEqual([]);
   });
@@ -17,7 +21,11 @@ describe('Colors', () => {
     expect(Colors.getValues('toHex')).toEqual([]);
   });
 
+  test('should return color values in HSL format', () => {
+    expect(Colors.getValues('toHsl')).toEqual([]);
+  });
+
   test('should return a Color object by its token', () => {
-    expect(() => {Colors.getColor('black')}).toThrow('Invalid type: black');
+    expect(() => {Colors.getColor('black');}).toThrow('Invalid token: \'black\' not recognized');
   });
 });

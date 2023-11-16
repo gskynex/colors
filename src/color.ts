@@ -90,9 +90,49 @@ export class Color {
     const data = this.toArray()
       .map((d) => d.toString(16))
       .map((d) => d.length < 2 ? `0${d}` : d)
-      .join('')
+      .join('');
 
     return `#${data}`;
+  }
+
+  /**
+   * Converts the color to a Human-Readable HSL string representation.
+   * @returns An HSL string (e.g., 'hsl(0deg, 100%, 50%)').
+   */
+  toHsl(): string {
+    const r = this.#r / 255;
+    const g = this.#g / 255;
+    const b = this.#b / 255;
+    const max = Math.max(r, g, b);
+    const min = Math.min(r, g, b);
+    const l = (max + min) / 2;
+
+    let h = 0;
+    let s;
+
+    if (max === min) {
+      h = 0;
+      s = 0;
+    } else {
+      const d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+
+      switch (max) {
+        case r:
+          h = (g - b) / d + (g < b ? 6 : 0);
+          break;
+        case g:
+          h = (b - r) / d + 2;
+          break;
+        case b:
+          h = (r - g) / d + 4;
+          break;
+      }
+
+      h = h! * 60;
+    }
+
+    return `hsl(${Math.round(h)}deg, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%)`;
   }
 
   /**

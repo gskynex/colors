@@ -21,7 +21,7 @@ export class ColorsBuilder {
       throw new Error(`Color with ${token} token already added.`);
     }
 
-    state.colorsTemp = { ...state.colorsTemp, [token]: new Color(r, g, b, token) }
+    state.colorsTemp = { ...state.colorsTemp, [token]: new Color(r, g, b, token) };
     return this;
   }
 

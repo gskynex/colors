@@ -6,5 +6,25 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:jest/recommended"
-  ]
+  ],
+  "rules": {
+    "arrow-parens": ["error", "always"],
+    "arrow-spacing": "error",
+    "comma-dangle": ["error", "always-multiline"],
+    "eqeqeq": "error",
+    "max-len": ["warn", { "code": 180 }],
+    "no-console": "error",
+    "no-else-return": "error",
+    "no-mixed-spaces-and-tabs": "error",
+    "no-shadow": "error",
+    "no-trailing-spaces": "error",
+    "no-undef": "error",
+    "no-unused-expressions": "error",
+    "no-unused-vars": "warn",
+    "no-var": "error",
+    "prefer-const": "error",
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "space-before-function-paren": ["error", "never"]
+  }
 }

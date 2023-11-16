@@ -25,6 +25,12 @@ describe('Color', () => {
     expect(black.toRgba(0.5)).toEqual('rgba(0, 0, 0, 0.5)');
   });
 
+  test('should correctly transform color to HSL string', () => {
+    const black = new Color(60, 51, 53, 'black');
+
+    expect(black.toHsl()).toEqual('hsl(347deg, 8%, 22%)');
+  });
+
   test('should throw an exception for invalid alpha value', () => {
     const black = new Color(0, 0, 0, 'black');
 

@@ -3,7 +3,7 @@ import { Color } from './color';
 /**
  * An array of valid color output types.
  */
-const types = ['toHex', 'toRgb'] as const;
+const types = ['toHex', 'toRgb', 'toHsl'] as const;
 
 /**
  * Represents the state of color-related data.
@@ -61,6 +61,14 @@ export class Colors {
   }
 
   /**
+   * Get a list of color types.
+   * @returns An array of color types.
+   */
+  static getTypes(): typeof types {
+    return types;
+  }
+
+  /**
    * Get color values in the specified format (e.g., 'toHex' or 'toRgb').
    * @param type The output format.
    * @throws Error if an invalid format is specified.
@@ -68,7 +76,7 @@ export class Colors {
    */
   static getValues(type: typeof types[number]): string[] | never {
     if (!types.includes(type)) {
-      throw new Error('Invalid type: type not recognized');
+      throw new Error(`Invalid type: '${type}' not recognized`);
     }
 
     return Object.values(state.colors).map((color) => color[type]());
@@ -84,7 +92,7 @@ export class Colors {
     const color = state.colors[token];
 
     if (!color) {
-      throw new Error(`Invalid type: ${token}`);
+      throw new Error(`Invalid token: '${token}' not recognized`);
     }
 
     return color;
