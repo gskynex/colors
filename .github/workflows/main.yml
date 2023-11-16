@@ -1,0 +1,39 @@
+name: Builder and Deploy package on NPM
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [closed]
+
+jobs:
+  web-deploy:
+    if: ${{ github.event.pull_request.merged }}
+    name: Builder and Deploy to NPM
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get latest code
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Code Quality Check (Lint)
+        run: npm run lint
+
+      - name: Run Tests
+        run: npm run test
+
+      - name: Build Project
+        run: npm run build
+
+      - name: Publish Package to NPM
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -35,4 +35,8 @@ describe('Colors and ColorsBuilder', () => {
   test('should return color values in RGB format', () => {
     expect(Colors.getValues('toRgb')).toEqual(['rgb(0, 0, 0)', 'rgb(255, 255, 255)']);
   });
+
+  test('should return color values in HSL format', () => {
+    expect(Colors.getValues('toHsl')).toEqual(['hsl(0deg, 0%, 0%)', 'hsl(0deg, 0%, 100%)']);
+  });
 });
