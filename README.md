@@ -13,12 +13,22 @@ The library aims to simplify and standardize color management in web development
 
 ### Installation
 
-You can install the library using npm.
+You can install the library using npm or yarn.
 
-Using npm:
+#### Using npm:
+
+For more information on using `npm` check out the docs [here](https://docs.npmjs.com/cli/v10/commands/npm-install).
 
 ```shell
 npm install @njs-lib/colors --save
+```
+
+#### Using yarn:
+
+For more information on using `yarn` check out the docs [here](https://yarnpkg.com/getting-started/usage#installing-all-the-dependencies).
+
+```shell
+yarn add @njs-lib/colors
 ```
 
 ### Color Class
@@ -163,6 +173,10 @@ Get color values in the specified format (e.g., 'toHex' or 'toRgb' or 'toHsl').
 
 Get a color by its token (e.g., 'white' or 'black').
 
+##### `static useDefault()`
+
+Set the Colors class to use default color values.
+
 #### Example
 
 ```javascript
@@ -171,7 +185,7 @@ import { Colors } from '@njs-lib/colors';
 Colors.getTotal();                       // 2
 Colors.getTokens();                      // ["black", "white"]
 Colors.getTypes();                       // ["toHex", "toRgb", "toHsl"]
-Colors.getColor('black');                // Color
+Colors.getColor('black');                // Black Color
 Colors.getColor('black').toHex();        // #000000
 Colors.getColor('black').toRgb();        // rgb(0, 0, 0)
 Colors.getColor('black').toRgba(0.4);    // rgba(0, 0, 0, 0.4)
@@ -179,4 +193,9 @@ Colors.getColor('black').toHsl();        // hsl(0deg, 0%, 0%)
 Colors.getValues('toHex');               // ["#000000", "#ffffff"]
 Colors.getValues('toRgb');               // ["rgb(0, 0, 0)", "rgb(255, 255, 255)"]
 Colors.getValues('toHsl');               // ["hsl(0deg, 0%, 0%)", "hsl(0deg, 0%, 100%)"]
+
+Colors.useDefault().getTotal();          // 141
+Colors.useDefault().getTokens();         // ["AliceBlue", "AntiqueWhite", etc]
+Colors.useDefault().getTypes();          // ["toHex", "toRgb", "toHsl"]
+Colors.useDefault().getColor('AliceBlue');            // AliceBlue Color
 ```

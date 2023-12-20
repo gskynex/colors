@@ -1,4 +1,4 @@
-name: Builder and Deploy package on NPM
+name: NPM Package
 
 on:
   pull_request:
@@ -7,24 +7,24 @@ on:
     types: [closed]
 
 jobs:
-  web-deploy:
+  build_publish:
     if: ${{ github.event.pull_request.merged }}
-    name: Builder and Deploy to NPM
+    name: Build and Publish to NPM
     runs-on: ubuntu-latest
     steps:
-      - name: Get latest code
+      - name: Get Latest Code
         uses: actions/checkout@v3
 
-      - name: Use Node.js 18
+      - name: Use Node.js 20
         uses: actions/setup-node@v2
         with:
-          node-version: '18'
+          node-version: '20'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install Dependencies
         run: npm install
 
-      - name: Code Quality Check (Lint)
+      - name: Run Code Quality (Lint)
         run: npm run lint
 
       - name: Run Tests

@@ -1,5 +1,5 @@
 import { Color } from './color';
-import { state } from './colors';
+import { colorsState } from './colors';
 
 /**
  * A builder class for managing and creating colors.
@@ -17,11 +17,12 @@ export class ColorsBuilder {
    * @returns The ColorsBuilder instance.
    */
   addColor(r: number, g: number, b: number, token: string): this | never {
-    if (state.colorsTemp[token]) {
+    if (colorsState.colorsTemp[token]) {
       throw new Error(`Color with ${token} token already added.`);
     }
 
-    state.colorsTemp = { ...state.colorsTemp, [token]: new Color(r, g, b, token) };
+    colorsState.colorsTemp = { ...colorsState.colorsTemp, [token]: new Color(r, g, b, token) };
+
     return this;
   }
 
@@ -30,7 +31,7 @@ export class ColorsBuilder {
    * @returns The ColorsBuilder instance.
    */
   addSkipException(): this {
-    state.skipException = true;
+    colorsState.skipException = true;
 
     return this;
   }
@@ -41,13 +42,13 @@ export class ColorsBuilder {
    * @returns The ColorsBuilder instance.
    */
   create(): this {
-    if (!state.created) {
-      state.created = true;
-      state.colors = { ...state.colorsTemp };
-      state.colorsTemp = {};
+    if (!colorsState.created) {
+      colorsState.created = true;
+      colorsState.colors = { ...colorsState.colorsTemp };
+      colorsState.colorsTemp = {};
     }
 
-    if (!state.skipException) {
+    if (!colorsState.skipException) {
       throw new Error('Colors have already been created.');
     }
 
@@ -58,9 +59,9 @@ export class ColorsBuilder {
    * Destroys the ColorsBuilder instance and clears all data.
    */
   destroy(): void {
-    state.created = false;
-    state.colors = {};
-    state.colorsTemp = {};
-    state.skipException = false;
+    colorsState.created = false;
+    colorsState.colors = {};
+    colorsState.colorsTemp = {};
+    colorsState.skipException = false;
   }
 }

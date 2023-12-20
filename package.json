@@ -1,17 +1,18 @@
 {
   "name": "@njs-lib/colors",
-  "version": "1.1.0",
-  "author": "njs-lib",
+  "description": "Simplify and standardize color management in web development with ease.",
+  "version": "1.2.0",
+  "author": "Ievgen Golovachev",
   "license": "MIT",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "homepage": "https://github.com/njs-lib/colors#readme",
+  "homepage": "https://github.com/gskynex/colors#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/njs-lib/colors.git"
+    "url": "https://github.com/gskynex/colors.git"
   },
   "bugs": {
-    "url": "https://github.com/njs-lib/colors/issues"
+    "url": "https://github.com/gskynex/colors/issues"
   },
   "files": [
     "dist/**/*"

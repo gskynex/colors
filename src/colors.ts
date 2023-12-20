@@ -1,4 +1,5 @@
 import { Color } from './color';
+import { defaultColors } from './default-colors.ts';
 
 /**
  * An array of valid color output types.
@@ -28,28 +29,52 @@ interface ColorsState {
    * Indicates whether exceptions should be skipped when working with colors.
    */
   skipException: boolean;
+
+  /**
+   * Indicates whether to use default colors
+   */
+  defaultColors: boolean;
 }
 
 /**
  * The global state object for managing color-related data.
  */
-export const state: ColorsState = {
+export const colorsState: ColorsState = {
   colors: {},
   colorsTemp: {},
+  defaultColors: false,
   created: false,
   skipException: false,
 };
+
+function getColors(): Record<string, Color> {
+  const colors = colorsState.defaultColors ? defaultColors : colorsState.colors;
+
+  colorsState.defaultColors = false;
+
+  return colors;
+}
 
 /**
  * Manages and interacts with color data.
  */
 export class Colors {
   /**
+   * Set the Colors class to use default color values.
+   * @returns The Colors class for method chaining.
+   */
+  static useDefault(): typeof Colors {
+    colorsState.defaultColors = true;
+
+    return Colors;
+  }
+
+  /**
    * Get the total number of colors.
    * @returns The total number of colors.
    */
   static getTotal(): number {
-    return Object.keys(state.colors).length;
+    return Object.keys(getColors()).length;
   }
 
   /**
@@ -57,7 +82,7 @@ export class Colors {
    * @returns An array of color tokens.
    */
   static getTokens(): string[] {
-    return Object.keys(state.colors);
+    return Object.keys(getColors());
   }
 
   /**
@@ -79,7 +104,7 @@ export class Colors {
       throw new Error(`Invalid type: '${type}' not recognized`);
     }
 
-    return Object.values(state.colors).map((color) => color[type]());
+    return Object.values(getColors()).map((color) => color[type]());
   }
 
   /**
@@ -89,7 +114,7 @@ export class Colors {
    * @returns The Color object corresponding to the token.
    */
   static getColor(token: string): Color | never {
-    const color = state.colors[token];
+    const color = getColors()[token];
 
     if (!color) {
       throw new Error(`Invalid token: '${token}' not recognized`);
